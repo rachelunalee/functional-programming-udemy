@@ -11,13 +11,16 @@ public class FP01Exercises {
                 List.of("Spring", "Spring Boot", "API", "Microservices",
                         "AWS", "PCF", "Azure", "Docker", "Kubernetes");
 
-        courses.stream()
-                .filter(course -> course.contains("Spring"))
-                .forEach(System.out::println);
+//        courses.stream()
+//                .filter(course -> course.contains("Spring"))
+//                .forEach(System.out::println);
 
 //        courses.stream()
 //                .filter(course->course.length()>=4)
 //                .forEach(System.out::println);
+        courses.stream()
+                .map(course -> course.length())
+                .forEach(System.out::println);
     }
 
     private static void printOddNumbersInListFunctional(List<Integer> numbers) {
