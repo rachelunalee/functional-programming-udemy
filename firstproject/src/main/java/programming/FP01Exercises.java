@@ -19,7 +19,7 @@ public class FP01Exercises {
 //                .filter(course->course.length()>=4)
 //                .forEach(System.out::println);
         courses.stream()
-                .map(course -> course.length())
+                .map(course -> course + " " + course.length())
                 .forEach(System.out::println);
     }
 
