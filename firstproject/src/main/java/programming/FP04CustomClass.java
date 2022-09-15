@@ -1,5 +1,6 @@
 package programming;
 
+import java.sql.SQLOutput;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -115,5 +116,31 @@ public class FP04CustomClass {
                 .max(comparingByNoOfStudentsAndNoOfReviews));
         System.out.println(courses.stream()
                 .min(comparingByNoOfStudentsAndNoOfReviews));
+
+
+        System.out.println(
+                courses.stream()
+                        .filter(reviewScoreGreaterThan95Predicate)
+                        .mapToInt(Course::getNoOfStudents)
+                        .sum()
+        );//use primitive method(maptoint) for primitives
+        System.out.println(
+                courses.stream()
+                        .filter(reviewScoreGreaterThan95Predicate)
+                        .mapToInt(Course::getNoOfStudents)
+                        .average()
+        );
+
+        System.out.println(
+                courses.stream()
+                        .collect(Collectors.groupingBy(
+                                Course::getCategory,Collectors.counting()))
+        );//count courses by category
+
+        System.out.println(
+                courses.stream()
+                        .collect(Collectors.groupingBy(Course::getCategory,
+                                Collectors.mapping(Course::getName,Collectors.toList())))
+        );
     }
 }
