@@ -69,7 +69,7 @@ public class FP04CustomClass {
                 new Course("AWS", "Cloud", 92, 21000),
                 new Course("Azure", "Cloud", 99, 21000),
                 new Course("Docker", "Cloud", 92, 20000),
-                new Course("Kubernetes", "Cloud", 91, 2000)
+                new Course("Kubernetes", "Cloud", 91, 20000)
         );
 
         Predicate<Course> reviewScoreGreaterThan95Predicate
@@ -91,14 +91,29 @@ public class FP04CustomClass {
 
         System.out.println(
                 courses.stream()
-                        .takeWhile(course -> course.getReviewScore()>=95)
+                        .takeWhile(course -> course.getReviewScore() >= 95)
                         .collect(Collectors.toList())
         );
 
         System.out.println(
                 courses.stream()
-                        .dropWhile(course -> course.getReviewScore()>=95)
+                        .dropWhile(course -> course.getReviewScore() >= 95)
                         .collect(Collectors.toList())
         );
+
+        Comparator<Course> comparingByNoOfStudentsAndNoOfReviews
+                = Comparator.comparingInt(Course::getNoOfStudents)
+                .thenComparingInt(Course::getReviewScore)
+                .reversed();
+
+        System.out.println(
+                courses.stream()
+                        .sorted(comparingByNoOfStudentsAndNoOfReviews)
+                        .collect(Collectors.toList())
+        );
+        System.out.println(courses.stream()
+                .max(comparingByNoOfStudentsAndNoOfReviews));
+        System.out.println(courses.stream()
+                .min(comparingByNoOfStudentsAndNoOfReviews));
     }
 }
